@@ -1,7 +1,7 @@
 import Tile from "./Tile";
 import React, { useState, useEffect } from 'react';
 
-function Board({xIsNext, history, setHistory, currentMove, setCurrentMove}) {
+function Board({xIsNext, history, setHistory, setCurrentMove}) {
     const [tiles, setTiles] = useState(Array(9).fill(null))
     const [status, setStatus] = useState("X's turn")
 
@@ -34,9 +34,8 @@ function Board({xIsNext, history, setHistory, currentMove, setCurrentMove}) {
           return null
     }    
 
-    function update(){
-        const updatedHistory = [...history.slice(0, currentMove+1), tiles]
-        console.log(updatedHistory);
+    function update(new_tiles){
+        const updatedHistory = [...history, new_tiles]
         setHistory(updatedHistory)
         setCurrentMove(updatedHistory.length-1)
     }
@@ -49,12 +48,13 @@ function Board({xIsNext, history, setHistory, currentMove, setCurrentMove}) {
             newTiles[i] = 'O'
         }
         setTiles(newTiles)
-        update()
+        update(newTiles)
     }
     
     return (
         <>
             <h2>{status}</h2>
+            
             <div className="row">
                 <Tile value={tiles[0]} handleClick={() => handleClick(0)}/>
                 <Tile value={tiles[1]} handleClick={() => handleClick(1)}/>
