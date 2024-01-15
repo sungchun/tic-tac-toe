@@ -1,9 +1,15 @@
 import React, { useState } from 'react';
 import './styles.css'
 
-function Tile({value, handleClick}) {
+function Tile({value, handleClick, winning}) {
     return (
-        <button className="tile" onClick={handleClick}>{value}</button>
+        <>
+          {
+            winning ? (
+              <button className="tile-winning" onClick={handleClick}>{value}</button>) : (
+              <button className="tile" onClick={handleClick}>{value}</button>)
+          }
+        </>
       );
 }
 

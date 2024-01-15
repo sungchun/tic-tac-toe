@@ -4,10 +4,11 @@ import React, { useState, useEffect } from 'react';
 function Board({boardList, xIsNext, history, setHistory, currentMove, setCurrentMove}) {
     const [tiles, setTiles] = useState(Array(9).fill(null))
     const [status, setStatus] = useState("X's turn")
-    const [winningLine, setWinningLine] = useState(null)
+    const [winningLine, setWinningLine] = useState([])
 
     useEffect(() => {
         setTiles(history[currentMove])
+        setWinningLine([])
     }, [currentMove]);
 
     useEffect(() => {
@@ -64,7 +65,9 @@ function Board({boardList, xIsNext, history, setHistory, currentMove, setCurrent
                 boardList.map((row, i) => (
                     <div key={i} className="row">
                         {row.map((num) =>(
-                            <Tile key={num} value={tiles[num]} handleClick={() => handleClick(num)}/>
+                            winningLine.includes(num) ? (
+                                <Tile key={num} value={tiles[num]} handleClick={() => handleClick(num)} winning={true}/>) : (
+                                <Tile key={num} value={tiles[num]} handleClick={() => handleClick(num)} winning={false}/>)
                         ))}
                     </div>
                 ))
