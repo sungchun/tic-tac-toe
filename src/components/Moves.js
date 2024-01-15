@@ -26,7 +26,7 @@ function Move({index, board,  setCurrentMove}) {
                     <div className='display_tile'>{board[8]}</div>
                 </div>
             </div>
-              <button onClick={jumpTo}>Go to move</button>
+              <button onClick={jumpTo}>{index === 0 ? "Reset Game": "Go to move " + index}</button>
         </li>
     );
 }
