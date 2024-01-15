@@ -48,6 +48,9 @@ function Board({boardList, xIsNext, history, setHistory, currentMove, setCurrent
     }
     
     function handleClick(i){
+        if (winningLine.length !== 0){
+            return
+        }
         const newTiles = tiles.slice() 
         if(xIsNext){
             newTiles[i] = 'X'
@@ -62,17 +65,6 @@ function Board({boardList, xIsNext, history, setHistory, currentMove, setCurrent
         <>
             <h2>{status}</h2>
             {
-                winningLine.length !== 0 ? ( 
-                    boardList.map((row, i) => (
-                        <div key={i} className="row">
-                            {row.map((num) =>(
-                                winningLine.includes(num) ? (
-                                    <Tile key={num} value={tiles[num]} winning={true}/>) : (
-                                    <Tile key={num} value={tiles[num]} winning={false}/>)
-                            ))}
-                        </div>
-                    ))
-                ) : (
                     boardList.map((row, i) => (                                                                                                      
                         <div key={i} className="row">
                             {row.map((num) =>(
@@ -82,7 +74,6 @@ function Board({boardList, xIsNext, history, setHistory, currentMove, setCurrent
                             ))}
                         </div>
                     ))
-                )
             } 
         </>
       );
