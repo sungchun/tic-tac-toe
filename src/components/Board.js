@@ -1,9 +1,10 @@
 import Tile from "./Tile";
 import React, { useState, useEffect } from 'react';
 
-function Board({xIsNext, history, setHistory, currentMove, setCurrentMove}) {
+function Board({boardList, xIsNext, history, setHistory, currentMove, setCurrentMove}) {
     const [tiles, setTiles] = useState(Array(9).fill(null))
     const [status, setStatus] = useState("X's turn")
+    const [winningLine, setWinningLine] = useState(null)
 
     useEffect(() => {
         setTiles(history[currentMove])
@@ -32,6 +33,7 @@ function Board({xIsNext, history, setHistory, currentMove, setCurrentMove}) {
           for (let i = 0; i < lines.length; i++) {
             const [a, b, c] = lines[i];
             if (tiles[a] && tiles[a] === tiles[b] && tiles[a] === tiles[c]) {
+              setWinningLine(lines[i])
               return tiles[a];
             }
           }
@@ -58,22 +60,15 @@ function Board({xIsNext, history, setHistory, currentMove, setCurrentMove}) {
     return (
         <>
             <h2>{status}</h2>
-            
-            <div className="row">
-                <Tile value={tiles[0]} handleClick={() => handleClick(0)}/>
-                <Tile value={tiles[1]} handleClick={() => handleClick(1)}/>
-                <Tile value={tiles[2]} handleClick={() => handleClick(2)}/>
-            </div>
-            <div className="row">
-                <Tile value={tiles[3]} handleClick={() => handleClick(3)}/>
-                <Tile value={tiles[4]} handleClick={() => handleClick(4)}/>
-                <Tile value={tiles[5]} handleClick={() => handleClick(5)}/>
-            </div>
-            <div className="row">
-                <Tile value={tiles[6]} handleClick={() => handleClick(6)}/>
-                <Tile value={tiles[7]} handleClick={() => handleClick(7)}/>
-                <Tile value={tiles[8]} handleClick={() => handleClick(8)}/>
-            </div>
+            {
+                boardList.map((row, i) => (
+                    <div key={i} className="row">
+                        {row.map((num) =>(
+                            <Tile key={num} value={tiles[num]} handleClick={() => handleClick(num)}/>
+                        ))}
+                    </div>
+                ))
+            } 
         </>
       );
 }

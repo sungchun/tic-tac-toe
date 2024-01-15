@@ -1,6 +1,6 @@
 import './moves.css'
 
-function Move({index, board,  setCurrentMove}) {
+function Move({index, board, boardList, setCurrentMove}) {
 
     function jumpTo(){
         console.log(index);
@@ -10,21 +10,15 @@ function Move({index, board,  setCurrentMove}) {
     return (
         <li>
             <div>
-                <div className="row">
-                    <div className='display_tile'>{board[0]}</div>
-                    <div className='display_tile'>{board[1]}</div>
-                    <div className='display_tile'>{board[2]}</div>
-                </div>
-                <div className="row">
-                    <div className='display_tile'>{board[3]}</div>
-                    <div className='display_tile'>{board[4]}</div>
-                    <div className='display_tile'>{board[5]}</div>
-                </div>
-                <div className="row">
-                    <div className='display_tile'>{board[6]}</div>
-                    <div className='display_tile'>{board[7]}</div>
-                    <div className='display_tile'>{board[8]}</div>
-                </div>
+            {
+                boardList.map((row, i) => (
+                    <div key={i} className="row">
+                        {row.map((num) =>(
+                            <div className='display_tile'>{board[num]}</div>
+                        ))}
+                    </div>
+                ))
+            } 
             </div>
               <button onClick={jumpTo}>{index === 0 ? "Reset Game": "Go to move " + index}</button>
         </li>
