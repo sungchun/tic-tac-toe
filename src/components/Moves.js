@@ -1,6 +1,11 @@
 import './moves.css'
 
-function Move({board,  setCurentMove}) {
+function Move({index, board,  setCurrentMove}) {
+
+    function jumpTo(){
+        console.log(index);
+        setCurrentMove(index)
+    }
 
     return (
         <li>
@@ -21,7 +26,7 @@ function Move({board,  setCurentMove}) {
                     <div className='display_tile'>{board[8]}</div>
                 </div>
             </div>
-              <button>Go to move</button>
+              <button onClick={jumpTo}>Go to move</button>
         </li>
     );
 }

@@ -9,14 +9,6 @@ function Game() {
     const xIsNext = currentMove % 2 === 0
     const currentTiles = history[currentMove]
 
-    function moves(){
-      const sliced_history = history.slice(1, currentMove+1)
-      for (const board of sliced_history.entries){
-        return(
-          board[1] ? <Move board={board[1]} move={board[0]}/> : <></>
-        )
-      }
-    }
     return (
         <div>
             <Board 
@@ -30,8 +22,8 @@ function Game() {
             <div className="game-info">
                 <ul>
                   {
-                    history.slice(0, currentMove+1).map((board) => {
-                      return board ? <Move board={board} setCurrentMove={setCurrentMove}/> : <></>
+                    history.slice(0, currentMove+1).map((board, index) => {
+                      return board ? <Move board={board} setCurrentMove={setCurrentMove} index={index}/> : <></>
                     })   
                   }
                 </ul>

@@ -1,9 +1,13 @@
 import Tile from "./Tile";
 import React, { useState, useEffect } from 'react';
 
-function Board({xIsNext, history, setHistory, setCurrentMove}) {
+function Board({xIsNext, history, setHistory, currentMove, setCurrentMove}) {
     const [tiles, setTiles] = useState(Array(9).fill(null))
     const [status, setStatus] = useState("X's turn")
+
+    useEffect(() => {
+        setTiles(history[currentMove])
+    }, [currentMove]);
 
     useEffect(() => {
         const victor = checkWinner(tiles)
@@ -35,7 +39,7 @@ function Board({xIsNext, history, setHistory, setCurrentMove}) {
     }    
 
     function update(new_tiles){
-        const updatedHistory = [...history, new_tiles]
+        const updatedHistory = [...history.slice(0, currentMove+1), new_tiles]
         setHistory(updatedHistory)
         setCurrentMove(updatedHistory.length-1)
     }
