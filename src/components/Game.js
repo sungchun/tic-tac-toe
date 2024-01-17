@@ -35,7 +35,17 @@ function Game() {
                 <ul>
                   {
                     history.slice(0, currentMove+1).map((board, index) => {
-                      return board ? <Move key={index} board={board} boardList={boardList} setCurrentMove={setCurrentMove} index={index}/> : <></>
+                      return board ?
+                        <Move 
+                          key={index}
+                          board={board}
+                          boardList={boardList}
+                          setCurrentMove={setCurrentMove}
+                          index={index}
+                          history={history}
+                          setHistory={setHistory}
+                        />
+                        : <></>
                     })   
                   }
                 </ul>

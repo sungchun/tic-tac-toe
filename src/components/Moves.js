@@ -1,10 +1,10 @@
 import './moves.css'
 
-function Move({index, board, boardList, setCurrentMove}) {
+function Move({index, board, boardList, setCurrentMove, history, setHistory}) {
 
     function jumpTo(){
-        console.log(index);
         setCurrentMove(index)
+        setHistory(history.slice(0,index+1))
     }
 
     return (
