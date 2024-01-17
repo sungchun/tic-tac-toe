@@ -45,6 +45,7 @@ function Board({history, setHistory, currentMove, setCurrentMove}) {
 
     function update(new_tiles){
         const updatedHistory = [...history.slice(0, currentMove+1), new_tiles]
+        setTiles(new_tiles)
         setHistory(updatedHistory)
         setCurrentMove(updatedHistory.length-1)
     }
@@ -59,7 +60,6 @@ function Board({history, setHistory, currentMove, setCurrentMove}) {
         }else{
             newTiles[i] = 'O'
         }
-        setTiles(newTiles)
         update(newTiles)
     }
     
@@ -67,15 +67,15 @@ function Board({history, setHistory, currentMove, setCurrentMove}) {
         <>
             <h2>{status}</h2>
             {
-                    boardList.map((row, i) => (                                                                                                      
-                        <div key={i} className="row">
-                            {row.map((num) =>(
-                                winningLine.includes(num) ? (
-                                    <Tile key={num} value={tiles[num]} handleClick={() => handleClick(num)} winning={true}/>) : (
-                                    <Tile key={num} value={tiles[num]} handleClick={() => handleClick(num)} winning={false}/>)
-                            ))}
-                        </div>
-                    ))
+                boardList.map((row, i) => (                                                                                                      
+                    <div key={i} className="row">
+                        {row.map((num) =>(
+                            winningLine.includes(num) ? (
+                                <Tile key={num} value={tiles[num]} handleClick={() => handleClick(num)} winning={true}/>) : (
+                                <Tile key={num} value={tiles[num]} handleClick={() => handleClick(num)} winning={false}/>)
+                        ))}
+                    </div>
+                ))
             } 
         </>
       );
