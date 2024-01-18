@@ -8,20 +8,20 @@ function Move({index, board, boardList, setCurrentMove, history, setHistory}) {
     }
 
     return (
-        <li>
+        <>
             <div>
             {
                 boardList.map((row, i) => (
                     <div key={i} className="row">
                         {row.map((num) =>(
-                            <div className='display_tile'>{board[num]}</div>
+                            <div key={num} className='display-tile'>{board[num]}</div>
                         ))}
                     </div>
                 ))
             } 
             </div>
               <button onClick={jumpTo}>{index === 0 ? "Reset Game": "Go to move " + index}</button>
-        </li>
+        </>
     );
 }
 

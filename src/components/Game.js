@@ -1,5 +1,6 @@
 import Board from "./Board";
 import Move from "./Moves";
+import Gamelog from "./Gamelog";
 import { useState, useEffect, useRef} from 'react';
 import {boardList} from './constants'
 
@@ -7,12 +8,14 @@ function Game() {
     const [history, setHistory] = useState([Array(9).fill(null)])    
     const [currentMove, setCurrentMove] = useState(0)
     const currentTiles = history[currentMove]
+    const [gameHistory, setGameHistory] = useState([])
     const firstRender = useRef(false)
 
     useEffect(() => {
       if (window.sessionStorage.getItem("history") !== null){
         setHistory(JSON.parse(window.sessionStorage.getItem("history")))      
         setCurrentMove(window.sessionStorage.getItem("current-move"))
+        //setGameHistory(JSON.parse(window.sessionStorage.getItem("game-history")))
       }
     }, []);
 
@@ -23,6 +26,18 @@ function Game() {
       }
       firstRender.current = true 
     }, [currentMove]);
+
+    useEffect(() => {
+     if(firstRender.current){
+      window.sessionStorage.setItem("game-history", JSON.stringify(gameHistory))
+     } 
+    }, [gameHistory]);
+
+    function playAgain(){
+      setGameHistory([...gameHistory, [history]])
+      setCurrentMove(0)
+      setHistory([Array(9).fill(null)])
+    }
 
     return (
         <div>
@@ -51,6 +66,15 @@ function Game() {
                     })   
                   }
                 </ul>
+            </div>
+            <button onClick={playAgain}>Play Again</button>
+            <div className="games-history">
+                 {console.log('game history', gameHistory)}
+                 {
+                    gameHistory.map((game, index) => {
+                      return <Gamelog key={index} index={index} game={game}/>
+                    })
+                 } 
             </div>
         </div>
       );
