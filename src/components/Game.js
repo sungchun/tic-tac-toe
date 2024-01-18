@@ -1,12 +1,13 @@
 import Board from "./Board";
 import Move from "./Moves";
-import { useState, useEffect} from 'react';
+import { useState, useEffect, useRef} from 'react';
 import {boardList} from './constants'
 
 function Game() {
     const [history, setHistory] = useState([Array(9).fill(null)])    
     const [currentMove, setCurrentMove] = useState(0)
     const currentTiles = history[currentMove]
+    const firstRender = useRef(false)
 
     useEffect(() => {
       if (window.sessionStorage.getItem("history") !== null){
@@ -16,10 +17,11 @@ function Game() {
     }, []);
 
     useEffect(() => {
-      if(currentMove !== 0){
+      if(firstRender.current){
         window.sessionStorage.setItem("current-move", currentMove)
         window.sessionStorage.setItem("history", JSON.stringify(history))
       }
+      firstRender.current = true 
     }, [currentMove]);
 
     return (
