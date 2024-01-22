@@ -51,10 +51,7 @@ function Board({history, setHistory, currentMove, setCurrentMove}) {
     }
     
     function handleClick(i){
-        if(winningLine.length !== 0){
-            return
-        }
-        if(tiles[i]){
+        if(winningLine.length !== 0 || tiles[i]){
             return
         }
         const newTiles = tiles.slice() 
