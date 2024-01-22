@@ -12,10 +12,11 @@ function Game() {
     const firstRender = useRef(false)
 
     useEffect(() => {
+      console.log("session storage", window.sessionStorage.getItem("history"))
       if (window.sessionStorage.getItem("history") !== null){
         setHistory(JSON.parse(window.sessionStorage.getItem("history")))      
         setCurrentMove(window.sessionStorage.getItem("current-move"))
-        //setGameHistory(JSON.parse(window.sessionStorage.getItem("game-history")))
+        setGameHistory(JSON.parse(window.sessionStorage.getItem("game-history")))
       }
     }, []);
 
@@ -24,13 +25,14 @@ function Game() {
         window.sessionStorage.setItem("current-move", currentMove)
         window.sessionStorage.setItem("history", JSON.stringify(history))
       }
-      firstRender.current = true 
     }, [currentMove]);
 
     useEffect(() => {
+     console.log("store game history")
      if(firstRender.current){
       window.sessionStorage.setItem("game-history", JSON.stringify(gameHistory))
      } 
+     firstRender.current = true
     }, [gameHistory]);
 
     function playAgain(){
