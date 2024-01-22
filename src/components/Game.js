@@ -10,25 +10,24 @@ function Game() {
     const currentTiles = history[currentMove]
     const [gameHistory, setGameHistory] = useState([])
     const firstRender = useRef(false)
+    const [winningLine, setWinningLine] = useState([])
 
     useEffect(() => {
-      console.log("session storage", window.sessionStorage.getItem("history"))
       if (window.sessionStorage.getItem("history") !== null){
         setHistory(JSON.parse(window.sessionStorage.getItem("history")))      
         setCurrentMove(window.sessionStorage.getItem("current-move"))
         setGameHistory(JSON.parse(window.sessionStorage.getItem("game-history")))
       }
     }, []);
-
+    
     useEffect(() => {
       if(firstRender.current){
         window.sessionStorage.setItem("current-move", currentMove)
         window.sessionStorage.setItem("history", JSON.stringify(history))
       }
-    }, [currentMove]);
+    }, [currentMove])
 
     useEffect(() => {
-     console.log("store game history")
      if(firstRender.current){
       window.sessionStorage.setItem("game-history", JSON.stringify(gameHistory))
      } 
@@ -36,9 +35,26 @@ function Game() {
     }, [gameHistory]);
 
     function playAgain(){
-      setGameHistory([...gameHistory, [history]])
+      if(gameHistory == []){
+        setGameHistory([[history]])
+      }else{
+        setGameHistory([...gameHistory, [history]])
+      }
       setCurrentMove(0)
       setHistory([Array(9).fill(null)])
+      setWinningLine([])
+    }
+
+    function replayButton(){
+      if(!currentTiles.includes(null) || winningLine.length > 0){
+        return(
+          <button onClick={playAgain}>Play Again</button>
+        )
+      }else{
+        return (
+          <></>
+        )
+      }
     }
 
     return (
@@ -49,6 +65,8 @@ function Game() {
                 setHistory={setHistory} 
                 currentMove={currentMove}
                 setCurrentMove={setCurrentMove}
+                winningLine={winningLine}
+                setWinningLine={setWinningLine}
             />
             <div className="game-info">
                 <ul>
@@ -69,13 +87,12 @@ function Game() {
                   }
                 </ul>
             </div>
-            <button onClick={playAgain}>Play Again</button>
+            {replayButton()}
             <div className="games-history">
-                 {console.log('game history', gameHistory)}
                  {
-                    gameHistory.map((game, index) => {
+                  gameHistory ? (gameHistory.map((game, index) => {
                       return <Gamelog key={index} index={index} game={game}/>
-                    })
+                    })) : (<></>)
                  } 
             </div>
         </div>
