@@ -2,7 +2,7 @@ import Tile from "./Tile";
 import React, { useState, useEffect } from 'react';
 import { boardList } from "./constants";
 
-function Board({history, setHistory, currentMove, setCurrentMove, winningLine, setWinningLine}) {
+function Board({history, setHistory, currentMove, setCurrentMove, winningLine, setWinningLine, gameMode}) {
     const [tiles, setTiles] = useState(Array(9).fill(null))
     const [status, setStatus] = useState("X's turn")
     const xIsNext = currentMove % 2 === 0

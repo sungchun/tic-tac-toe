@@ -3,6 +3,7 @@ import Move from "./Moves";
 import Gamelog from "./Gamelog";
 import { useState, useEffect, useRef} from 'react';
 import {boardList} from './constants'
+import GameModeSelect from "./GameModeSelect";
 
 function Game() {
     const [history, setHistory] = useState([Array(9).fill(null)])    
@@ -11,6 +12,7 @@ function Game() {
     const [gameHistory, setGameHistory] = useState([])
     const firstRender = useRef(false)
     const [winningLine, setWinningLine] = useState([])
+    const [gameMode, setGameMode] = useState(0)
 
     useEffect(() => {
       if (window.sessionStorage.getItem("history") !== null){
@@ -59,6 +61,7 @@ function Game() {
 
     return (
         <div>
+            <GameModeSelect setGameMode={setGameMode}/> 
             <Board 
                 tiles={currentTiles}
                 history={history}
@@ -67,6 +70,7 @@ function Game() {
                 setCurrentMove={setCurrentMove}
                 winningLine={winningLine}
                 setWinningLine={setWinningLine}
+                gameMode={gameMode}
             />
             <div className="game-info">
                 <ul>
