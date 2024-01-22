@@ -59,7 +59,21 @@ function Board({history, setHistory, currentMove, setCurrentMove, winningLine, s
         }else{
             newTiles[i] = 'O'
         }
+        console.log("man tiles", newTiles);
         update(newTiles)
+    }
+
+    function computerMove(tiles){
+        var open_indexes = []
+        for(let i=0; i<9; i++){
+            if(tiles[i] == null){
+                open_indexes.push(i)
+            }
+        }
+        console.log(open_indexes)
+        const move = tiles[Math.floor(Math.random()*tiles.length)] 
+        tiles[move] = 'O'
+        console.log("comp tiles", tiles)
     }
     
     return (
