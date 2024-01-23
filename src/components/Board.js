@@ -16,6 +16,9 @@ function Board({history, setHistory, currentMove, setCurrentMove, winningLine, s
     }, [currentMove]);
 
     useEffect(() => {
+        if(currentMove === 0){
+            return
+        }
         const victor = checkWinner(tiles)
         if(victor){
            setStatus(`${victor} is the winner!`) 
