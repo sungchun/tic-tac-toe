@@ -7,18 +7,6 @@ function Board({history, setHistory, currentMove, setCurrentMove, winningLine, s
     const [status, setStatus] = useState("X's turn")
     const xIsNext = currentMove % 2 === 0
 
-    function computerMove(tiles){                                      
-        var open_indexes = []
-        for(let i=0; i<9; i++){
-            if(tiles[i] == null){
-                open_indexes.push(i)
-            }
-        }
-        const move = open_indexes[Math.floor(Math.random()*open_indexes.length)] 
-        tiles[move] = 'O'
-        return tiles
-    }
-
     useEffect(() => {
         setTiles(history[currentMove])
         setWinningLine([])
@@ -34,8 +22,20 @@ function Board({history, setHistory, currentMove, setCurrentMove, winningLine, s
         }else{
             setStatus(`${xIsNext ? 'X' : 'O'}'s turn.`)
         }
-    }, [tiles]);
+    }, [currentMove]);
 
+     function computerMove(tiles){                                      
+        var open_indexes = []
+        for(let i=0; i<9; i++){
+            if(tiles[i] == null){
+                open_indexes.push(i)
+            }
+        }
+        const move = open_indexes[Math.floor(Math.random()*open_indexes.length)] 
+        tiles[move] = 'O'
+        return tiles
+    }
+    
     function checkWinner(tiles){
         const lines = [
             [0, 1, 2],
