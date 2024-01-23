@@ -12,8 +12,19 @@ function GameModeSelect({setGameMode, currentMove, gameMode}) {
                     <h3>{modes[gameMode]}</h3>
                 ) : (
                     <select onChange={changeGameMode}>
-                        <option value="0">Player 2</option>
-                        <option value="1">Computer</option>
+                        {
+                            gameMode === 0 ? (
+                                <>
+                                    <option value="0" selected="selected">Player 2</option>
+                                    <option value="1">Computer</option>
+                                </>
+                            ):(
+                                <>
+                                    <option value="0">Player 2</option>
+                                    <option value="1" selected="selected">Computer</option>
+                                </>
+                            )
+                        }
                     </select>
                 )
             }
