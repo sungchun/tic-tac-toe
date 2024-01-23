@@ -1,7 +1,6 @@
 function GameModeSelect({setGameMode}) {
     function changeGameMode(object){
         setGameMode(object.target.value)
-        console.log("trigger")
     }
     return (
         <div className="game-mode-select">
