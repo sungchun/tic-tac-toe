@@ -61,7 +61,7 @@ function Game() {
 
     return (
         <div>
-            <GameModeSelect setGameMode={setGameMode}/> 
+            <GameModeSelect setGameMode={setGameMode} currentMove={currentMove} gameMode={gameMode}/> 
             <Board 
                 tiles={currentTiles}
                 history={history}
