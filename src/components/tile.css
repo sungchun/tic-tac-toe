@@ -1,12 +1,13 @@
 .tile {
     border: 1px solid black;
-    height: 30px;
-    width: 30px;
+    height: 60px;
+    width: 60px;
+    font-size: 25px;
 }
 
 .tile-winning{
     border: 1px solid black;
-    height: 30px;
-    width: 30px;
+    height: 60px;
+    width: 60px;
     background-color: green;
 }

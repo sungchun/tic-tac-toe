@@ -1,3 +1,5 @@
+import './gamemode.css'
+
 function GameModeSelect({setGameMode, currentMove, gameMode}) {
     const modes = ["Player 2", "Computer"]    
 
@@ -11,7 +13,7 @@ function GameModeSelect({setGameMode, currentMove, gameMode}) {
                 currentMove > 0 ? (
                     <h3>{modes[gameMode]}</h3>
                 ) : (
-                    <select onChange={changeGameMode}>
+                    <select className="select-menu" onChange={changeGameMode}>
                         {
                             gameMode === 0 ? (
                                 <>

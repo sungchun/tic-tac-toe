@@ -1,4 +1,4 @@
-import './styles.css'
+import './tile.css'
 
 function Tile({value, handleClick, winning}) {
     return (

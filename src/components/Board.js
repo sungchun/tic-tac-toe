@@ -1,6 +1,7 @@
 import Tile from "./Tile";
 import React, { useState, useEffect } from 'react';
 import { boardList } from "./constants";
+import './board.css'
 
 function Board({history, setHistory, currentMove, setCurrentMove, winningLine, setWinningLine, gameMode}) {
     const [tiles, setTiles] = useState(Array(9).fill(null))
@@ -81,7 +82,7 @@ function Board({history, setHistory, currentMove, setCurrentMove, winningLine, s
     }
     
     return (
-        <>
+        <div className="board">
             <h2>{status}</h2>
             {
                 boardList.map((row, i) => (                                                                                                      
@@ -94,7 +95,7 @@ function Board({history, setHistory, currentMove, setCurrentMove, winningLine, s
                     </div>
                 ))
             } 
-        </>
+        </div>
       );
 }
 

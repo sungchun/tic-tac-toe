@@ -1,0 +1,11 @@
+.gamelog{
+    height: 150px;
+    display: flex;
+    flex-direction: column;
+}
+
+.gamelog-tiles{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}

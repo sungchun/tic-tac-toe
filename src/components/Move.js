@@ -8,8 +8,8 @@ function Move({index, board, boardList, setCurrentMove, history, setHistory}) {
     }
 
     return (
-        <>
-            <div>
+        <ul className='move'>
+            <div className='display-board'>
             {
                 boardList.map((row, i) => (
                     <div key={i} className="row">
@@ -21,7 +21,7 @@ function Move({index, board, boardList, setCurrentMove, history, setHistory}) {
             } 
             </div>
               <button onClick={jumpTo}>{index === 0 ? "Reset Game": "Go to move " + index}</button>
-        </>
+        </ul>
     );
 }
 

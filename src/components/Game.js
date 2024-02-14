@@ -1,9 +1,10 @@
 import Board from "./Board";
-import Move from "./Moves";
+import Move from "./Move";
 import Gamelog from "./Gamelog";
 import { useState, useEffect, useRef} from 'react';
 import {boardList} from './constants'
 import GameModeSelect from "./GameModeSelect";
+import './game.css'
 
 function Game() {
     const [history, setHistory] = useState([Array(9).fill(null)])    
@@ -61,36 +62,38 @@ function Game() {
 
     return (
         <div>
+          <div className="game">
             <GameModeSelect setGameMode={setGameMode} currentMove={currentMove} gameMode={gameMode}/> 
-            <Board 
-                tiles={currentTiles}
-                history={history}
-                setHistory={setHistory} 
-                currentMove={currentMove}
-                setCurrentMove={setCurrentMove}
-                winningLine={winningLine}
-                setWinningLine={setWinningLine}
-                gameMode={gameMode}
-            />
-            <div className="game-info">
-                <ul>
-                  {
-                    history.slice(0, currentMove+1).map((board, index) => {
-                      return board ?
-                        <Move 
-                          key={index}
-                          board={board}
-                          boardList={boardList}
-                          setCurrentMove={setCurrentMove}
-                          index={index}
-                          history={history}
-                          setHistory={setHistory}
-                        />
-                        : <></>
-                    })   
-                  }
-                </ul>
+            <div className="game-board">
+              <Board 
+                  tiles={currentTiles}
+                  history={history}
+                  setHistory={setHistory} 
+                  currentMove={currentMove}
+                  setCurrentMove={setCurrentMove}
+                  winningLine={winningLine}
+                  setWinningLine={setWinningLine}
+                  gameMode={gameMode}
+              />
+              <div className="game-info">
+                    {
+                      history.slice(0, currentMove+1).map((board, index) => {
+                        return board ?
+                          <Move 
+                            key={index}
+                            board={board}
+                            boardList={boardList}
+                            setCurrentMove={setCurrentMove}
+                            index={index}
+                            history={history}
+                            setHistory={setHistory}
+                          />
+                          : <></>
+                      })   
+                    }
+              </div>
             </div>
+          </div>
             {replayButton()}
             <div className="games-history">
                  {

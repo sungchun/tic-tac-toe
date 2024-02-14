@@ -1,12 +1,11 @@
 import DisplayBoard from "./DisplayBoard";
-import { boardList } from "./constants";
-import './moves.css'
+import './gamelog.css'
 
 function Gamelog({index, game}) {
     return (
-        <li>
+        <li className="gamelog">
             <h2>Game{index+1}</h2>
-            <div>
+            <div className="gamelog-tiles">
             {
                 game[0].map((board)=>{
                    return <DisplayBoard board={board}/> 
